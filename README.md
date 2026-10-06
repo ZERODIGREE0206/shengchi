@@ -1,6 +1,6 @@
 # 省吃 waimai-coupon
 
-一款「外卖领券 + 附近真实门店」聚合工具，基于 **Taro 4 + React + TypeScript**，一套代码同时构建 **H5** 与 **微信小程序** 双端。
+一款「外卖领券 + 附近真实门店」聚合工具，基于 **Taro 4 + React + TypeScript**，一套代码同时构建 **H5**、**微信小程序** 与 **Android App**（Capacitor 打包 H5 产物）。
 
 > 接入美团 / 饿了么 / 淘宝闪购 / 京东四大平台领券入口，附近门店数据来自腾讯位置服务真实 POI，杜绝「模拟门店 + 伪造菜单」；连锁品牌展示全国统一的标准菜单，非连锁小店明确引导去平台查看真实菜单。
 
@@ -76,6 +76,26 @@ npm run build:weapp
 2. `appid` 请填写你自己的（或使用游客模式）；个人配置可放 `project.private.config.json`（已 gitignore）
 3. 在小程序后台配置 **request 合法域名**：`https://<你的环境ID>.api.tcloudbasegateway.com`
 4. 跳转外部小程序需在 `app.config.ts` 的 `navigateToMiniProgramAppIdList` 中声明目标 appId（美团/饿了么/淘宝闪购/京东官方小程序）
+
+## Android App（Capacitor）
+
+App 本质是把 H5 产物（`dist-h5/`）装进 Capacitor WebView，与小程序共用同一套 Taro 源码，互不影响。
+
+```bash
+# 1. 编译 H5 产物（自动输出到 dist-h5/）并同步进安卓工程
+npm run build:app
+
+# 2. 打包 APK（二选一）
+#    a) 命令行（需 JDK 17 + Android SDK，配置 ANDROID_HOME）
+cd android && ./gradlew assembleDebug
+#    b) Android Studio 打开 android/ 目录，Build > Build APK(s)
+```
+
+产物：`android/app/build/outputs/apk/debug/app-debug.apk`。
+
+- 首次生成原生工程：`npx cap add android`（已生成过则跳过；`android/` 目录不提交 git）
+- App 内行为差异：外链用系统 Custom Tab 打开（不顶掉 App）、定位用原生 GPS（WGS84→GCJ02 已转换）、领券口令复制后需手动打开对应 APP（无微信气泡辅助）
+- 需要修改 `appId` / 应用名时编辑 `capacitor.config.ts` 后重新 `npx cap add android`
 
 ## 部署指南（CloudBase）
 

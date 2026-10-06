@@ -22,6 +22,7 @@
  */
 import Taro from '@tarojs/taro';
 import { PLATFORM_JUMP, PLATFORM_META } from '@/constants/platforms';
+import { openExternalUrl } from '@/services/native';
 import type { Coupon, PlatformCode } from '@/types/coupon';
 
 /** 平台自身的品牌名（出现在券 brand 字段时说明是平台通用红包，不是品牌门店券） */
@@ -143,7 +144,8 @@ async function openBrandOrder(platformCode: PlatformCode, brand: string): Promis
 
   if (process.env.TARO_ENV === 'h5' && typeof window !== 'undefined') {
     try {
-      window.open(searchUrl, '_blank');
+      // Capacitor App 内走 Custom Tab，纯 H5 浏览器新标签
+      await openExternalUrl(searchUrl);
       return;
     } catch (err) {
       console.warn('[platformJump] open brand url failed:', err);
@@ -353,7 +355,7 @@ export async function openCouponPlatform(
       if (typeof window !== 'undefined') {
         const webUrl = extractWebUrl(claimUrl);
         if (webUrl) {
-          window.open(webUrl, '_blank');
+          await openExternalUrl(webUrl);
           return;
         }
       }
@@ -362,7 +364,7 @@ export async function openCouponPlatform(
     }
     // H5 端：http/https 联盟链接直接打开，让用户看到真实领券页面
     if (typeof window !== 'undefined' && /^https?:\/\//.test(claimUrl)) {
-      window.open(claimUrl, '_blank');
+      await openExternalUrl(claimUrl);
       return;
     }
     await copyAndToast(claimUrl, meta.copyTip);

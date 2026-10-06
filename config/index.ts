@@ -17,7 +17,11 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
       828: 1.81 / 2,
     },
     sourceRoot: 'src',
-    outputRoot: process.env.TARO_OUTPUT_DIR || 'dist',
+    // H5 产物独立输出到 dist-h5（Capacitor App 的 webDir），与微信小程序产物 dist 隔离，
+    // 两端可同时构建互不覆盖；仍可用 TARO_OUTPUT_DIR 显式覆盖
+    outputRoot:
+      process.env.TARO_OUTPUT_DIR ||
+      (process.env.TARO_ENV === 'h5' ? 'dist-h5' : 'dist'),
     plugins: ['@tarojs/plugin-html'],
     defineConstants: {},
     copy: {
@@ -71,6 +75,8 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
     },
     h5: {
       publicPath: '/',
+      // hash 路由：Capacitor WebView（https://localhost）下不依赖服务端回退，加载最稳
+      router: { mode: 'hash' },
       staticDirectory: 'static',
       output: {
         filename: 'js/[name].[hash:8].js',

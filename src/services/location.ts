@@ -8,6 +8,7 @@
  */
 import Taro from '@tarojs/taro';
 import { callReverseGeocode } from './cloudbase';
+import { isNativeApp, getNativePosition } from './native';
 
 export interface LocationInfo {
   latitude: number;
@@ -25,6 +26,42 @@ export interface LocationResult {
 
 const CACHE_KEY = 'app_location_cache';
 const CACHE_TTL = 30 * 1000; // 30 秒缓存
+
+/**
+ * WGS84 → GCJ02（火星坐标系）转换
+ * App 内原生 GPS 返回 WGS84，而腾讯位置服务（逆解析/周边搜索）使用 GCJ02，
+ * 不转换会偏移数百米；微信端 getLocation 已直接返回 GCJ02 无需转换
+ */
+const GCJ_A = 6378245.0;
+const GCJ_EE = 0.00669342162296594323;
+
+function transformLat(x: number, y: number): number {
+  let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+  ret += ((20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0) / 3.0;
+  ret += ((20.0 * Math.sin(y * Math.PI) + 40.0 * Math.sin((y / 3.0) * Math.PI)) * 2.0) / 3.0;
+  ret += ((160.0 * Math.sin((y / 12.0) * Math.PI) + 320 * Math.sin((y * Math.PI) / 30.0)) * 2.0) / 3.0;
+  return ret;
+}
+
+function transformLng(x: number, y: number): number {
+  let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+  ret += ((20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0) / 3.0;
+  ret += ((20.0 * Math.sin(x * Math.PI) + 40.0 * Math.sin((x / 3.0) * Math.PI)) * 2.0) / 3.0;
+  ret += ((150.0 * Math.sin((x / 12.0) * Math.PI) + 300.0 * Math.sin((x / 30.0) * Math.PI)) * 2.0) / 3.0;
+  return ret;
+}
+
+function wgs84ToGcj02(lat: number, lng: number): LocationInfo {
+  let dLat = transformLat(lng - 105.0, lat - 35.0);
+  let dLng = transformLng(lng - 105.0, lat - 35.0);
+  const radLat = (lat / 180.0) * Math.PI;
+  let magic = Math.sin(radLat);
+  magic = 1 - GCJ_EE * magic * magic;
+  const sqrtMagic = Math.sqrt(magic);
+  dLat = (dLat * 180.0) / (((GCJ_A * (1 - GCJ_EE)) / (magic * sqrtMagic)) * Math.PI);
+  dLng = (dLng * 180.0) / ((GCJ_A / sqrtMagic) * Math.cos(radLat) * Math.PI);
+  return { latitude: lat + dLat, longitude: lng + dLng };
+}
 
 /** 高精度定位超时（GPS 信号弱时不傻等） */
 const HIGH_ACC_TIMEOUT = 5000;
@@ -71,6 +108,13 @@ export async function getLocation(forceRefresh = false): Promise<{
         accuracy = (res as any).accuracy;
         console.log('[location] 普通定位成功:', accuracy?.toFixed(0) + ' 米');
       }
+    } else if (isNativeApp()) {
+      // Capacitor App：原生 GPS（系统弹定位授权），返回 WGS84 → 转 GCJ02 对齐腾讯坐标系
+      const pos = await getNativePosition(15000);
+      const gcj = wgs84ToGcj02(pos.latitude, pos.longitude);
+      location = gcj;
+      accuracy = pos.accuracy;
+      console.log('[location] App 原生定位成功:', accuracy?.toFixed(0) + ' 米');
     } else {
       // H5：enableHighAccuracy=false 走 IP/WiFi（桌面无 GPS 不挂起），8 秒超时
       const res = await Promise.race([
@@ -97,8 +141,8 @@ export async function getLocation(forceRefresh = false): Promise<{
       return { status: 'denied', location: null };
     }
 
-    // H5 桌面端无 GPS → 降级上海（开发环境兜底）
-    if (!isWeapp) {
+    // H5 桌面端无 GPS → 降级上海（开发环境兜底；App 定位失败不做静默降级，如实报失败）
+    if (!isWeapp && !isNativeApp()) {
       const fallback: LocationInfo = { latitude: 31.2304, longitude: 121.4737 };
       writeCache(fallback);
       return { status: 'located', location: fallback };

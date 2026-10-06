@@ -1,7 +1,12 @@
 # 依赖与产物
 node_modules/
 dist/
+dist-h5/
 .swc/
+
+# Capacitor 原生工程（在本地生成/构建，产物目录较大，排除版本控制）
+android/
+ios/
 
 # 环境变量（含环境 ID / Publishable Key，禁止提交）
 .env
