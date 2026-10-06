@@ -1,0 +1,388 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+}
+
+// ===== 顶部渐变 Header：用户信息 + 统计 =====
+.header {
+  padding: 48rpx $page-padding 96rpx;
+  background: $page-header-gradient;
+  box-sizing: border-box;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  @include flex-center;
+  width: 112rpx;
+  height: 112rpx;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 16rpx rgba(150, 60, 10, 0.18);
+}
+
+.avatarEmoji {
+  font-size: 56rpx;
+  line-height: 1;
+}
+
+/* 已登录：头像显示手机尾号两位 */
+.avatarTail {
+  font-size: 40rpx;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  line-height: 1;
+}
+
+/* 未登录引导按钮 */
+.loginBtn {
+  @include flex-center;
+  margin-left: auto;
+  padding: 14rpx 30rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4rpx 12rpx rgba(150, 60, 10, 0.14);
+  flex-shrink: 0;
+}
+
+.loginBtnText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: #ff6b2c;
+}
+
+/* 退出登录按钮 */
+.logoutBtn {
+  @include flex-center;
+  margin-left: auto;
+  padding: 12rpx 26rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2rpx solid rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.logoutText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+}
+
+.userInfo {
+  margin-left: $spacing-lg;
+  min-width: 0;
+}
+
+.userName {
+  display: block;
+  font-size: 36rpx;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  line-height: $line-height-tight;
+}
+
+.userTip {
+  display: block;
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.statCard {
+  display: flex;
+  align-items: baseline;
+  margin-top: $spacing-xl;
+  padding: $spacing-lg $spacing-xl;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+  border-radius: $radius-md;
+}
+
+.statNum {
+  font-size: 56rpx;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  line-height: 1;
+}
+
+.statLabel {
+  margin-left: $spacing-sm;
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+// ===== 内容区（上浮卡片式） =====
+.content {
+  position: relative;
+  margin-top: -48rpx;
+  padding: 40rpx $page-padding 48rpx;
+  background: $color-bg-page;
+  border-radius: 48rpx 48rpx 0 0;
+  box-sizing: border-box;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+}
+
+.sectionTitleBar {
+  width: 8rpx;
+  height: 32rpx;
+  margin-right: $spacing-sm;
+  background: $color-primary;
+  border-radius: 4rpx;
+}
+
+.sectionTitle {
+  font-size: 34rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.sectionCount {
+  margin-left: auto;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+// ===== 已领券列表（票券式行卡） =====
+.claimList {
+  margin-top: $spacing-lg;
+}
+
+.claimCard {
+  display: flex;
+  align-items: center;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  box-shadow: 0 2rpx 12rpx rgba(31, 35, 41, 0.05);
+}
+
+.claimLeft {
+  flex-shrink: 0;
+}
+
+.logoFallback {
+  @include flex-center;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+
+.logoEmoji {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.claimInfo {
+  flex: 1;
+  min-width: 0;
+  margin: 0 $spacing-md;
+}
+
+.claimTopRow {
+  display: flex;
+  align-items: center;
+}
+
+.claimBrand {
+  font-size: 30rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.claimTag {
+  margin-left: $spacing-sm;
+  padding: 2rpx 12rpx;
+  font-size: 20rpx;
+  color: $color-primary;
+  background: rgba(232, 84, 26, 0.08);
+  border-radius: $radius-sm;
+}
+
+.claimTitle {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 28rpx;
+  font-weight: $font-weight-medium;
+  color: #e03428;
+  line-height: 1.3;
+}
+
+.claimMetaRow {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.claimPlatform {
+  margin-left: 6rpx;
+  font-size: 22rpx;
+  color: $color-text-tertiary;
+}
+
+.claimTime {
+  margin-left: auto;
+  padding-left: $spacing-sm;
+  font-size: 22rpx;
+  color: $color-text-tertiary;
+}
+
+.useBtn {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 128rpx;
+  height: 64rpx;
+  background: $brand-gradient;
+  border-radius: $radius-round;
+  box-shadow: 0 4rpx 12rpx rgba(232, 84, 26, 0.28);
+}
+
+.useBtnText {
+  font-size: 26rpx;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+// ===== 加载骨架屏 =====
+.skeletonList {
+  margin-top: $spacing-lg;
+}
+
+.skeletonCard {
+  display: flex;
+  align-items: center;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+}
+
+.skeletonLogo {
+  width: 88rpx;
+  height: 88rpx;
+  background: #f0f1f3;
+  border-radius: 50%;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.skeletonLines {
+  flex: 1;
+  margin-left: $spacing-md;
+}
+
+.skeletonLine {
+  height: 28rpx;
+  margin-bottom: $spacing-sm;
+  background: #f0f1f3;
+  border-radius: $radius-sm;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+// ===== 错误提示 =====
+.errorBox {
+  @include flex-center;
+  flex-direction: column;
+  padding: 80rpx 0;
+}
+
+.errorIcon {
+  font-size: 88rpx;
+  line-height: 1;
+}
+
+.errorText {
+  margin-top: $spacing-md;
+  font-size: 30rpx;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.errorTip {
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.retryBtn {
+  @include flex-center;
+  margin-top: $spacing-lg;
+  padding: 0 48rpx;
+  height: 72rpx;
+  background: $brand-gradient;
+  border-radius: $radius-round;
+}
+
+.retryText {
+  font-size: 28rpx;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+// ===== 空状态 =====
+.empty {
+  @include flex-center;
+  flex-direction: column;
+  padding: 96rpx 0 72rpx;
+}
+
+.emptyIcon {
+  font-size: 104rpx;
+  line-height: 1;
+}
+
+.emptyText {
+  margin-top: $spacing-md;
+  font-size: 30rpx;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.emptyTip {
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.goHomeBtn {
+  @include flex-center;
+  margin-top: $spacing-xl;
+  padding: 0 56rpx;
+  height: 80rpx;
+  background: $brand-gradient;
+  border-radius: $radius-round;
+  box-shadow: 0 4rpx 12rpx rgba(232, 84, 26, 0.28);
+}
+
+.goHomeText {
+  font-size: 28rpx;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+.listFooter {
+  @include flex-center;
+  padding-top: $spacing-xl;
+}
+
+.listFooterText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}

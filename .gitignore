@@ -1,0 +1,34 @@
+# 依赖与产物
+node_modules/
+dist/
+.swc/
+
+# 环境变量（含环境 ID / Publishable Key，禁止提交）
+.env
+.env.*
+!.env.example
+
+# 微信开发者工具个人配置（含个人 appid）
+project.private.config.json
+
+# 本地临时脚本（含密钥，禁止提交）
+_*.cjs
+_*.js
+_*.mjs
+_*.json
+
+# 临时工作目录
+.tmp-logos/
+.auth/
+.pai/
+
+# 编辑器与系统
+.trae/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 日志与测试
+*.log
+coverage/

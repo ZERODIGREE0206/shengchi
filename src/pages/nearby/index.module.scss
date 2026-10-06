@@ -1,0 +1,383 @@
+@use '@/styles/variables.scss' as *;
+
+// ============================================
+// 点外卖页样式（App 暖橙主题，不走 CSS 变量）
+// ============================================
+
+.page {
+  min-height: 100vh;
+  background: #f5f6f7;
+  padding-bottom: $spacing-lg;
+}
+
+.header {
+  padding: $spacing-md $page-padding $spacing-lg;
+  background: $page-header-gradient;
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: $shadow-card;
+}
+
+.locationBar {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  padding: $spacing-sm $spacing-sm;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.locationIcon {
+  font-size: 28rpx;
+  margin-right: $spacing-xs;
+}
+
+.locationText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  max-width: 460rpx;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  line-height: 1.3;
+}
+
+.locationTextWrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.locationCoord {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3rpx;
+}
+
+.locationTextDim {
+  font-weight: $font-weight-normal;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.locationArrow {
+  margin-left: $spacing-xs;
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.relocateBtn {
+  margin-left: auto;
+  padding: 6rpx 20rpx;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.relocateText {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-top: $spacing-md;
+  padding: 0 $spacing-md;
+  height: 72rpx;
+  background: #ffffff;
+  border-radius: $radius-round;
+}
+
+.searchIcon {
+  font-size: 26rpx;
+  margin-right: $spacing-sm;
+}
+
+.searchInput {
+  flex: 1;
+  height: 72rpx;
+  font-size: 26rpx;
+  color: $color-text-primary;
+}
+
+// ---- 金刚区分类 ----
+.kingkong {
+  margin-top: $spacing-md;
+  @include scroll-x-container;
+}
+
+.kkItem {
+  @include scroll-x-item(110rpx);
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast;
+}
+
+.kkItemActive {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.kkEmoji {
+  font-size: 44rpx;
+  line-height: 1.2;
+}
+
+.kkLabel {
+  margin-top: 4rpx;
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.kkItemActive .kkLabel {
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+}
+
+// ---- 内容区 ----
+.content {
+  padding: $spacing-md $page-padding 0;
+}
+
+// ---- 平台筛选条 ----
+.platformFilter {
+  @include scroll-x-container;
+
+  margin-bottom: $spacing-md;
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  height: 56rpx;
+  padding: 0 $spacing-md;
+  margin-right: $spacing-sm;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-round;
+  box-sizing: border-box;
+}
+
+.filterChipActive {
+  background: $brand-gradient;
+  border-color: transparent;
+}
+
+.filterChipText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-left: 4rpx;
+}
+
+.filterChipActive .filterChipText {
+  color: $color-text-white;
+}
+
+// ---- section ----
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  margin: $spacing-md 0 $spacing-sm;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.sectionTip {
+  margin-left: auto;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+// ---- 门店列表 ----
+.storeList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.storeCard {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+.storeLogoFallback {
+  flex-shrink: 0;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.storeLogoEmoji {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.storeInfo {
+  flex: 1;
+  min-width: 0;
+  margin: 0 $spacing-md;
+}
+
+.storeNameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.storeName {
+  flex: 1;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.storeMeta {
+  display: block;
+  margin-top: 6rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+}
+
+// ---- 三平台共有标识 ----
+.sharedRow {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 8rpx;
+}
+
+.sharedText {
+  margin-left: 4rpx;
+  font-size: 20rpx;
+  color: $color-text-tertiary;
+}
+
+// ---- 三平台下单按钮组 ----
+.orderBtnGroup {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10rpx;
+  margin-left: $spacing-sm;
+}
+
+.platformOrderBtn {
+  @include button-reset;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 124rpx;
+  min-height: 64rpx;
+  border-radius: $radius-round;
+  background: var(--order-bg, #ff6b2c);
+  box-shadow: var(--order-shadow, 0 4rpx 12rpx rgba(0, 0, 0, 0.12));
+  box-sizing: border-box;
+  position: relative;
+  padding: 8rpx 0;
+
+  &:active {
+    opacity: 0.85;
+    transform: scale(0.94);
+  }
+}
+
+.platformOrderBtnWide {
+  width: 148rpx;
+  min-height: 68rpx;
+}
+
+// ---- 比价：最便宜平台高亮 ----
+.platformOrderBtnCheapest {
+  outline: 3rpx solid #ffd700;
+  outline-offset: 2rpx;
+  animation: cheapest-pulse 1.6s ease-in-out infinite;
+}
+
+.cheapestBadge {
+  position: absolute;
+  top: -16rpx;
+  right: -8rpx;
+  z-index: 2;
+  padding: 2rpx 10rpx;
+  font-size: 18rpx;
+  font-weight: $font-weight-bold;
+  color: #7a4a00;
+  background: linear-gradient(90deg, #ffd700 0%, #ffb700 100%);
+  border-radius: 8rpx;
+  box-shadow: 0 2rpx 8rpx rgba(255, 183, 0, 0.4);
+  white-space: nowrap;
+}
+
+@keyframes cheapest-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.5), var(--order-shadow, 0 4rpx 12rpx rgba(0,0,0,0.12)); }
+  50% { box-shadow: 0 0 0 8rpx rgba(255, 215, 0, 0), var(--order-shadow, 0 4rpx 12rpx rgba(0,0,0,0.12)); }
+}
+
+.platformOrderText {
+  font-size: 22rpx;
+  font-weight: $font-weight-semibold;
+  color: var(--order-text, #ffffff);
+  white-space: nowrap;
+  letter-spacing: 0.5rpx;
+}
+
+.platformOrderBtnWide .platformOrderText {
+  font-size: $font-size-sm;
+}
+
+// ---- 空状态 / 页脚 ----
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xl 0;
+}
+
+.emptyIcon {
+  font-size: 88rpx;
+}
+
+.emptyText {
+  margin-top: $spacing-sm;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.emptyTip {
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.listFooter {
+  padding: $spacing-lg 0 $spacing-sm;
+  text-align: center;
+}
+
+.listFooterText {
+  font-size: $font-size-xs;
+  color: $color-text-disabled;
+}

@@ -1,0 +1,37 @@
+// ============================================
+// 主题配色变量（外卖省钱助手 - 食欲橙主题）
+// ============================================
+
+// 品牌主题色：美食省钱 - 暖橙
+$color-primary: #ff6b2c;
+$color-primary-light: #ff9500;
+$color-primary-dark: #e8541a;
+
+// 功能色
+$color-success: #00b42a;
+$color-warning: #ff7d00;
+$color-error: #f53f3f;
+$color-info: #ff6b2c;
+
+// 背景色
+$color-bg-page: #fff7f2;
+$color-bg-card: #ffffff;
+$color-bg-hover: #fff1e8;
+
+// 文本色
+$color-text-primary: #1d2129;
+$color-text-secondary: #4e5969;
+$color-text-tertiary: #86909c;
+$color-text-disabled: #c9cdd4;
+$color-text-white: #ffffff;
+
+// 边框色
+$color-border: #f0e4dc;
+$color-divider: #f7ede6;
+
+// 业务变量
+$color-price: #f53f3f; // 优惠金额强调红
+$color-tag-bg: #fff1e8; // 优惠标签背景
+$color-claimed: #c9cdd4; // 已领取灰
+$brand-gradient: linear-gradient(135deg, #ff6b2c 0%, #ff9500 100%);
+$page-header-gradient: linear-gradient(160deg, #ff6b2c 0%, #ff8a00 60%, #ff9e2c 100%);

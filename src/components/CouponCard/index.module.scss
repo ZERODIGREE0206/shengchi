@@ -1,0 +1,152 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+// 品牌区
+.brandArea {
+  display: flex;
+  align-items: center;
+  width: 260rpx;
+  flex-shrink: 0;
+}
+
+.logo {
+  @include flex-center;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+  flex-shrink: 0;
+}
+
+.logoEmoji {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: $spacing-sm;
+  overflow: hidden;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+}
+
+.brandName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.tag {
+  flex-shrink: 0;
+  margin-left: $spacing-xs;
+  padding: 2rpx 12rpx;
+  font-size: $font-size-xs;
+  line-height: 1.6;
+  color: $color-primary;
+  background: $color-tag-bg;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+}
+
+.platformRow {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.platform {
+  margin-left: 8rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+}
+
+// 票券虚线分隔
+.divider {
+  width: 0;
+  height: 96rpx;
+  border-left: 2rpx dashed $color-border;
+  flex-shrink: 0;
+}
+
+// 优惠信息区
+.offerArea {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  padding-left: $spacing-md;
+}
+
+.offerText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.offerTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+  line-height: $line-height-tight;
+  @include text-ellipsis;
+}
+
+.offerDesc {
+  margin-top: 8rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-tight;
+  @include text-ellipsis;
+}
+
+// 领取按钮
+.claimBtn {
+  @include flex-center;
+  flex-shrink: 0;
+  min-width: 136rpx;
+  height: $button-height-sm;
+  padding: 0 $spacing-md;
+  margin-left: $spacing-sm;
+  background: $brand-gradient;
+  border-radius: $radius-button;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.85;
+    transform: scale(0.96);
+  }
+}
+
+.claimBtnText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  white-space: nowrap;
+}
+
+.claimed {
+  background: $color-claimed;
+
+  &:active {
+    opacity: 1;
+    transform: none;
+  }
+}

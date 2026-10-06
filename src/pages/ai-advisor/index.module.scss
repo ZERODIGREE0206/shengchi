@@ -1,0 +1,354 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: $color-bg-page;
+}
+
+// ===== Header =====
+.header {
+  padding: 36rpx $page-padding 32rpx;
+  background: $page-header-gradient;
+  box-sizing: border-box;
+}
+
+.title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  line-height: $line-height-tight;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 6rpx;
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.9);
+  @include text-ellipsis;
+}
+
+// ===== 聊天区 =====
+.chatArea {
+  flex: 1;
+  min-height: 0;
+  padding: $spacing-md $page-padding 0;
+  box-sizing: border-box;
+}
+
+.bubbleRow {
+  display: flex;
+  margin-bottom: $spacing-md;
+}
+
+.bubbleRowUser {
+  justify-content: flex-end;
+}
+
+.bubbleRowAi {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.aiAvatar {
+  flex-shrink: 0;
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: $spacing-sm;
+  border-radius: $radius-round;
+  background: $color-bg-card;
+  box-shadow: 0 2rpx 8rpx rgba(255, 107, 44, 0.2);
+}
+
+.bubble {
+  max-width: 78%;
+  padding: 20rpx 24rpx;
+  border-radius: $radius-lg;
+  box-sizing: border-box;
+}
+
+.bubbleAi {
+  background: $color-bg-card;
+  border-top-left-radius: $radius-xs;
+  box-shadow: 0 4rpx 16rpx rgba(31, 35, 41, 0.06);
+}
+
+.bubbleUser {
+  background: $brand-gradient;
+  border-top-right-radius: $radius-xs;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 44, 0.28);
+}
+
+.bubbleText {
+  font-size: $font-size-md;
+  line-height: 1.6;
+  color: $color-text-primary;
+
+  .bubbleUser & {
+    color: $color-text-white;
+  }
+}
+
+.bubblePending {
+  min-width: 120rpx;
+}
+
+.bubbleFailed {
+  .bubbleText {
+    color: $color-text-tertiary;
+  }
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 4rpx 0;
+}
+
+.typingDot {
+  font-size: 16rpx;
+  color: $color-text-tertiary;
+  animation: typing-blink 1.2s infinite;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes typing-blink {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// ===== AI 推荐门店卡片 =====
+.pickList {
+  margin: $spacing-sm 0 $spacing-md 80rpx;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.pickCard {
+  padding: 24rpx;
+  background: $color-bg-card;
+  border-radius: $radius-xl;
+  box-shadow: 0 2rpx 12rpx rgba(255, 152, 84, 0.12);
+  // 左侧橙色装饰条
+  border-left: 6rpx solid $color-primary;
+  overflow: hidden;
+}
+
+.pickHeader {
+  display: flex;
+  align-items: center;
+}
+
+.pickLogoFallback {
+  flex-shrink: 0;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: $radius-md;
+  @include flex-center;
+}
+
+.pickLogoEmoji {
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.pickHeadInfo {
+  flex: 1;
+  min-width: 0;
+  margin-left: $spacing-sm;
+}
+
+.pickNameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.pickName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.pickTags {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  margin-top: 6rpx;
+}
+
+.pickTag {
+  font-size: 20rpx;
+  color: $color-text-tertiary;
+  background: #fff5ec;
+  padding: 3rpx 12rpx;
+  border-radius: $radius-round;
+  line-height: 1.6;
+}
+
+.pickReasonBox {
+  margin: $spacing-sm 0;
+  padding: 14rpx 20rpx;
+  background: #fff5ec;
+  border-radius: $radius-md;
+}
+
+.pickReasonText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
+.pickFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pickPrice {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.pickPriceNum {
+  font-size: 40rpx;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+}
+
+.pickPriceUnit {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.pickPriceHint {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.pickBtn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  padding: 0 28rpx;
+  height: 68rpx;
+  border-radius: $radius-round;
+  background: $brand-gradient;
+  @include flex-center;
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 44, 0.3);
+
+  &:active {
+    opacity: 0.88;
+    transform: scale(0.96);
+  }
+}
+
+.pickBtnText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  white-space: nowrap;
+}
+
+.pickBtnArrow {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  line-height: 1;
+}
+
+// ===== 快捷提问 =====
+.quickRow {
+  @include scroll-x-container;
+  padding: $spacing-sm $page-padding 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.quickChip {
+  @include scroll-x-item(auto);
+  display: inline-flex;
+  align-items: center;
+  height: 60rpx;
+  padding: 0 24rpx;
+  margin-right: $spacing-sm;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-round;
+  box-sizing: border-box;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.quickChipText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+// ===== 输入栏 =====
+.inputBar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $page-padding;
+  padding-bottom: calc($spacing-sm + env(safe-area-inset-bottom));
+  background: $color-bg-card;
+  box-shadow: 0 -4rpx 16rpx rgba(31, 35, 41, 0.06);
+  box-sizing: border-box;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 80rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border-radius: $radius-round;
+  box-sizing: border-box;
+  font-size: $font-size-md;
+}
+
+.sendBtn {
+  flex-shrink: 0;
+  height: 80rpx;
+  padding: 0 36rpx;
+  border-radius: $radius-round;
+  background: $brand-gradient;
+  @include flex-center;
+
+  &:active {
+    opacity: 0.88;
+  }
+}
+
+.sendBtnDisabled {
+  opacity: 0.45;
+}
+
+.sendBtnText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  white-space: nowrap;
+}

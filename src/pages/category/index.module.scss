@@ -1,0 +1,364 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: $color-bg-page;
+  overflow: hidden;
+}
+
+// ===== 顶部渐变 Header（与首页一致） =====
+.header {
+  padding: 40rpx $page-padding 76rpx;
+  background: $page-header-gradient;
+  box-sizing: border-box;
+}
+
+.title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  line-height: $line-height-tight;
+}
+
+.subtitle {
+  display: block;
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+// ===== 双栏主体 =====
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  position: relative;
+  margin-top: -40rpx;
+  background: $color-bg-page;
+  border-radius: 40rpx 40rpx 0 0;
+  overflow: hidden;
+}
+
+// ===== 左侧品类栏 =====
+.sidebar {
+  width: 172rpx;
+  height: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 20rpx 0 140rpx;
+}
+
+.sideItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rpx 14rpx;
+  padding: 24rpx 8rpx;
+  border-radius: $radius-lg;
+  transition: background $transition-fast;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+// 选中态：白色胶囊 + 左侧橙色指示条
+.sideItemActive {
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6rpx;
+    height: 44rpx;
+    border-radius: $radius-xs;
+    background: $brand-gradient;
+  }
+}
+
+.sideIcon {
+  font-size: 40rpx;
+  line-height: 1;
+}
+
+.sideName {
+  margin-top: 10rpx;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  @include text-ellipsis;
+  max-width: 132rpx;
+}
+
+.sideNameActive {
+  color: $color-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.sideCount {
+  margin-top: 4rpx;
+  font-size: $font-size-xs;
+  color: $color-text-disabled;
+}
+
+.sideCountActive {
+  color: $color-primary;
+}
+
+// ===== 右侧品牌优惠列表 =====
+.content {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 24rpx 0 4rpx;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-xl;
+  padding: 8rpx $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0 16rpx;
+}
+
+.titleBar {
+  width: 8rpx;
+  height: 32rpx;
+  border-radius: $radius-xs;
+  background: $brand-gradient;
+}
+
+.cardTitle {
+  margin-left: $spacing-sm;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.cardCount {
+  margin-left: auto;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+// 品牌行
+.brandRow {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+
+  & + & {
+    border-top: 1rpx solid $color-divider;
+  }
+}
+
+// emoji 兜底图标（尺寸与 BrandIcon md 对齐）
+.logoFallback {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+}
+
+.logoEmoji {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.brandInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 $spacing-md;
+}
+
+.brandLine {
+  display: flex;
+  align-items: center;
+}
+
+.brandName {
+  font-size: 30rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.brandPlatform {
+  flex-shrink: 0;
+  margin-left: $spacing-sm;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.offerTitle {
+  margin-top: 8rpx;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+}
+
+.offerDesc {
+  margin-top: 6rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+}
+
+// 领取按钮
+.claimBtn {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 108rpx;
+  height: 56rpx;
+  border-radius: $radius-round;
+  background: $brand-gradient;
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 44, 0.3);
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.claimBtnClaimed {
+  background: #f2f3f5;
+  box-shadow: none;
+}
+
+.claimText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+.claimTextClaimed {
+  color: $color-text-disabled;
+}
+
+// 列表底部提示（预留底部 tabBar 空间）
+.listFooter {
+  @include flex-center;
+  padding: $spacing-lg 0 140rpx;
+}
+
+.listFooterText {
+  font-size: $font-size-xs;
+  color: $color-text-disabled;
+}
+
+// ===== 加载骨架屏 =====
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeletonCard {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  margin-bottom: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+}
+
+.skeletonLogo {
+  flex-shrink: 0;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+  background: #f0f1f3;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.skeletonLines {
+  flex: 1;
+  margin-left: $spacing-md;
+}
+
+.skeletonLine {
+  height: 24rpx;
+  margin: 14rpx 0;
+  border-radius: $radius-xs;
+  background: #f0f1f3;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+// ===== 错误状态 =====
+.errorBox {
+  @include flex-center;
+  flex-direction: column;
+  padding: 80rpx 0;
+}
+
+.errorIcon {
+  font-size: 88rpx;
+  line-height: 1;
+}
+
+.errorText {
+  margin-top: $spacing-lg;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.errorTip {
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.retryBtn {
+  @include flex-center;
+  margin-top: $spacing-lg;
+  width: 200rpx;
+  height: 72rpx;
+  border-radius: $radius-round;
+  background: $brand-gradient;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.retryText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+// ===== 空品类提示 =====
+.emptyTipBox {
+  @include flex-center;
+  padding: 64rpx 0;
+}
+
+.emptyTipText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}

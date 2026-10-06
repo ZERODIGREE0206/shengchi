@@ -1,0 +1,405 @@
+@use '@/styles/variables.scss' as *;
+
+// ============================================
+// 平台外卖专区共享样式（美团黄/饿了么蓝/淘宝橙由 CSS 变量注入）
+// 仿平台点外卖首页：定位栏 + 搜索 + 金刚区 + 券横幅 + 附近门店
+// 主题变量定义见 components/PlatformZone/theme.ts
+// ============================================
+
+.page {
+  min-height: 100vh;
+  background: #f5f6f7;
+  padding-bottom: $spacing-lg;
+}
+
+// ---- Header：平台色渐变，底部大圆角压在内容区上 ----
+.header {
+  padding: $spacing-md $page-padding $spacing-lg;
+  background: var(--zone-grad);
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: $shadow-card;
+}
+
+.locationBar {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  padding: $spacing-sm $spacing-sm;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.locationIcon {
+  font-size: 28rpx;
+  margin-right: $spacing-xs;
+}
+
+.locationText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+
+  max-width: 460rpx;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: var(--zone-header-text);
+  line-height: 1.3;
+}
+
+.locationTextWrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.locationCoord {
+  margin-top: 2rpx;
+  font-size: 20rpx;
+  color: var(--zone-header-text-dim);
+  opacity: 0.7;
+  letter-spacing: 0.3rpx;
+}
+
+.locationTextDim {
+  font-weight: $font-weight-normal;
+  color: var(--zone-header-text-dim);
+}
+
+.locationArrow {
+  margin-left: $spacing-xs;
+  font-size: $font-size-sm;
+  color: var(--zone-header-arrow);
+}
+
+.relocateBtn {
+  margin-left: auto;
+  padding: 6rpx 20rpx;
+  border-radius: $radius-round;
+  background: var(--zone-relocate-bg);
+}
+
+.relocateText {
+  font-size: $font-size-xs;
+  color: var(--zone-relocate-text);
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-top: $spacing-md;
+  padding: 0 $spacing-md;
+  height: 72rpx;
+  background: #ffffff;
+  border-radius: $radius-round;
+}
+
+.searchIcon {
+  font-size: 26rpx;
+  margin-right: $spacing-sm;
+}
+
+.searchInput {
+  flex: 1;
+  height: 72rpx;
+  font-size: 26rpx;
+  color: $color-text-primary;
+}
+
+// ---- 金刚区分类 ----
+.kingkong {
+  margin-top: $spacing-md;
+  @include scroll-x-container;
+}
+
+.kkItem {
+  @include scroll-x-item(110rpx);
+
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast;
+}
+
+.kkItemActive {
+  background: var(--zone-kk-active-bg);
+}
+
+.kkEmoji {
+  font-size: 44rpx;
+  line-height: 1.2;
+}
+
+.kkLabel {
+  margin-top: 4rpx;
+  font-size: $font-size-xs;
+  color: var(--zone-kk-label);
+}
+
+.kkItemActive .kkLabel {
+  font-weight: $font-weight-semibold;
+  color: var(--zone-kk-active-text);
+}
+
+// ---- 内容区 ----
+.content {
+  padding: $spacing-md $page-padding 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  margin: $spacing-md 0 $spacing-sm;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.sectionTip {
+  margin-left: auto;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+// ---- 「更多外卖优惠」券横幅 ----
+.couponScroll {
+  @include scroll-x-container;
+}
+
+.couponChip {
+  @include scroll-x-item(440rpx);
+
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: var(--zone-chip-bg);
+  border: 1rpx solid var(--zone-chip-border);
+  border-radius: $radius-md;
+}
+
+.couponInfo {
+  flex: 1;
+  min-width: 0;
+  margin-right: $spacing-sm;
+}
+
+.couponTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+}
+
+.couponTitleRow {
+  display: flex;
+  align-items: center;
+}
+
+.couponChipTag {
+  flex-shrink: 0;
+  margin-left: $spacing-xs;
+  padding: 0 10rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  font-size: 20rpx;
+  color: $color-text-tertiary;
+  background: #fff;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-round;
+}
+
+.couponChipTagHot {
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b2c 0%, #ff9500 100%);
+  border-color: transparent;
+}
+
+.couponBrand {
+  display: block;
+  margin-top: 4rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+}
+
+.claimBtn {
+  @include button-reset;
+
+  flex-shrink: 0;
+  padding: 0 28rpx;
+  height: 56rpx;
+  border-radius: $radius-round;
+  background: $color-price;
+}
+
+.claimBtnText {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+.claimBtnDisabled {
+  background: $color-claimed;
+}
+
+// ---- 附近门店列表 ----
+.storeList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.storeCard {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+// 无官方 Logo 的门店：emoji 色块兜底（与 BrandIcon md 尺寸对齐）
+.storeLogoFallback {
+  flex-shrink: 0;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.storeLogoEmoji {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.storeInfo {
+  flex: 1;
+  min-width: 0;
+  margin: 0 $spacing-md;
+}
+
+.storeName {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.storeMeta {
+  display: block;
+  margin-top: 6rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+}
+
+.couponTag {
+  display: inline-block;
+  margin-top: 8rpx;
+  padding: 2rpx 12rpx;
+  background: #fff0ee;
+  border: 1rpx solid rgba(245, 63, 63, 0.4);
+  border-radius: $radius-xs;
+}
+
+.couponTagText {
+  font-size: $font-size-xs;
+  color: $color-price;
+}
+
+.orderBtn {
+  @include button-reset;
+
+  flex-shrink: 0;
+  width: 120rpx;
+  height: 64rpx;
+  border-radius: $radius-round;
+  background: var(--zone-order-bg);
+  box-shadow: var(--zone-order-shadow);
+}
+
+.orderBtnText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: var(--zone-order-text);
+}
+
+// ---- 骨架屏 ----
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.skeletonCard {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+}
+
+.skeletonLogo {
+  width: 88rpx;
+  height: 88rpx;
+  flex-shrink: 0;
+  border-radius: $radius-round;
+  background: #f0f1f3;
+}
+
+.skeletonLines {
+  flex: 1;
+  margin-left: $spacing-md;
+}
+
+.skeletonLine {
+  height: 24rpx;
+  margin-bottom: $spacing-sm;
+  border-radius: $radius-xs;
+  background: #f0f1f3;
+}
+
+// ---- 空状态 / 页脚 ----
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xl 0;
+}
+
+.emptyIcon {
+  font-size: 88rpx;
+}
+
+.emptyText {
+  margin-top: $spacing-sm;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.emptyTip {
+  margin-top: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.listFooter {
+  padding: $spacing-lg 0 $spacing-sm;
+  text-align: center;
+}
+
+.listFooterText {
+  font-size: $font-size-xs;
+  color: $color-text-disabled;
+}
